@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+	<title>
+		Post HTML
+	</title>
+	<style type="text/css">
+		span {
+			
+		}
+		.box{
+			float: left;
+		}
+		.boxContainer{
+			overflow: hidden;
+		}
+		.orikaesi{
+			word-break: break-all;
+		}
+		.txtcontainer{
+			width: 500px;
+		}
+	</style>
+	<script>
+		function post(webhookurltmp, uservartmp, avatarvartmp, textvartmp){
+
+			var webhookurl;
+			var uservar;
+			var avatarvar;
+			var textvar;
+
+			webhookurl = document.getElementById("webhookURL").value;
+			uservar = document.getElementById("username").value;
+			avatarvar = 'http://www.paper-glasses.com/api/twipi/' + document.getElementById("avatar").value;
+			textvar = document.getElementById("txtbox").value;
+
+			if (webhookurl == ""){
+				webhookurl = webhookurltmp;
+				console.log(webhookurl);
+			}
+			if (uservar == ""){
+				uservar = uservartmp;
+				console.log(uservar);
+			}
+			if (avatarvar == 'http://www.paper-glasses.com/api/twipi/'){
+				avatarvar = 'http://www.paper-glasses.com/api/twipi/' + avatarvartmp;
+				console.log(avatarvar);
+			}
+			if (textvar == ""){
+				textvar = textvartmp;
+				console.log(textvar);
+			}		
+
+
+			console.log(webhookurl);
+			if (webhookurl == ""){
+			webhookurl = '';
+			console.log(webhookurl);
+			}
+			if (uservar == ""){
+			uservar = '';
+			console.log(uservar);
+			}
+			if (textvar == ""){
+				textvar = 'empty';
+				console.log(textvar);
+			}
+			if (avatarvar == "http://www.paper-glasses.com/api/twipi/"){
+				avatarvar = "";
+				console.log(avatarvar);
+			}
+
+
+
+			console.log(uservar);
+			console.log(avatarvar);
+			console.log(textvar);
+
+			axios.post( webhookurl , {
+			"username": uservar ,
+			"avatar_url": avatarvar ,
+			"content": textvar
+				})
+		//console.log(document.getElementById("txtbox").value)
+		}
+		function sleep(ms) {
+ 		return new Promise(resolve => setTimeout(resolve, ms));
+		}
+	</script>
+</head>
+<body>
+	<div class="boxContainer">
+		<div class="box">
+			<div><p>webhook URL</p><span><input type="text" name="webhookURL" id="webhookURL" value="REQUIRED"></br></span></div>
+			<div><p>username shown in discord</p> <span><input type="text" name="username" id="username" value=""></br></span></div>
+			<div><p>twitter account name</p><span><input type="text" name="avatar" id="avatar" value=""></br></span></div>
+			<div><p>the thing that you want to send</p> <span><input type="text" name="txtb" id="txtbox" value=""></br></span></div>
+			<input type="button" value="send" onclick='post("", "", "", "")'></br>
+		</div>
+	</div><br>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>
